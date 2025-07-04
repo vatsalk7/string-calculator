@@ -2,6 +2,7 @@ package com.incubytes.stringcalculator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StringCalculatorTest {
     private StringCalculator calculator;
@@ -14,5 +15,10 @@ public class StringCalculatorTest {
     @Test
     public void empty(){
         // Test with the most basic case to confirm the program runs correctly.
+    }
+
+    @Test
+    void shouldReturnZeroForEmptyString() {
+        assertEquals(0, calculator.add(""));
     }
 }
