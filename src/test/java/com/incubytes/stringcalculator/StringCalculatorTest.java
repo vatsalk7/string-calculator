@@ -21,4 +21,10 @@ public class StringCalculatorTest {
     void shouldReturnZeroForEmptyString() {
         assertEquals(0, calculator.add(""));
     }
+
+    @Test
+    void shouldReturnNumberIfSingleNumberGiven() {
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(1, calculator.add("1"));
+    }
 }
