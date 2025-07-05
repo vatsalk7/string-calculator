@@ -69,4 +69,9 @@ public class StringCalculatorTest {
         assertEquals(15, calculator.add("//[***]\n5***5***5"));
     }
 
+    @Test
+    public void shouldSupportMultiCharDelimite2() throws Exception {
+        assertEquals(10, calculator.add("//[*][%][ ]\n1*2%3 4"));
+    }
+
 }

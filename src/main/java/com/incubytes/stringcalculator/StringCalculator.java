@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
@@ -14,18 +15,25 @@ public class StringCalculator {
 
         String delimiter = ",|\n";
 
-        // Handle custom delimiter syntax
+        // Handle custom delimiter
         if (numbers.startsWith("//")) {
-            int delimiterIndex = numbers.indexOf("\n");
-            String customDelimiter = numbers.substring(2, delimiterIndex);
+            int delimiterEndIndex = numbers.indexOf("\n");
+            String delimiterSpec = numbers.substring(2, delimiterEndIndex);
+            numbers = numbers.substring(delimiterEndIndex + 1);
 
-            // Support [multi-char] delimiters: //[*] or //[***]
-            if (customDelimiter.startsWith("[") && customDelimiter.endsWith("]")) {
-                customDelimiter = customDelimiter.substring(1, customDelimiter.length() - 1);
+            List<String> delimiters = new ArrayList<>();
+
+            // Support for multiple delimiters like //[*][%][ ]
+            if (delimiterSpec.contains("[") && delimiterSpec.contains("]")) {
+                Matcher matcher = Pattern.compile("\\[(.*?)]").matcher(delimiterSpec);
+                while (matcher.find()) {
+                    delimiters.add(Pattern.quote(matcher.group(1)));
+                }
+            } else {
+                delimiters.add(Pattern.quote(delimiterSpec));
             }
 
-            delimiter = Pattern.quote(customDelimiter);
-            numbers = numbers.substring(delimiterIndex + 1);
+            delimiter = String.join("|", delimiters);
         }
 
         String[] tokens = numbers.split(delimiter);
@@ -33,7 +41,7 @@ public class StringCalculator {
         List<String> negatives = new ArrayList<>();
 
         for (String token : tokens) {
-            if (token.isEmpty()) continue;
+            if (token.isBlank()) continue;
 
             int num = Integer.parseInt(token.trim());
 
@@ -47,7 +55,7 @@ public class StringCalculator {
         }
 
         if (!negatives.isEmpty()) {
-            throw new NegativeNumberException("Negative numbers not allowed: " + String.join(",", negatives));
+            throw new NegativeNumberException("Negative numbers not allowed: " + String.join(", ", negatives));
         }
 
         return sum;
