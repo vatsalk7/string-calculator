@@ -70,8 +70,16 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void shouldSupportMultiCharDelimite2() throws Exception {
+    public void shouldSupportMultiCharDelimiter2() throws Exception {
         assertEquals(10, calculator.add("//[*][%][ ]\n1*2%3 4"));
     }
+
+    @Test
+    void shouldThrowExceptionOnEmptyToken() {
+        assertThrows(IllegalArgumentException.class, () -> calculator.add("2,,6"));
+    }
+
+
+
 
 }
