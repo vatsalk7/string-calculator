@@ -11,7 +11,8 @@ import java.util.regex.Pattern;
 public class StringCalculator {
 
     public int add(@NotNull String numbers) {
-        if (numbers.isEmpty()) return 0;
+        if (numbers.isEmpty())
+            return 0;
 
         String delimiter = ",|\n";
         if (hasCustomDelimiter(numbers)) {
@@ -28,6 +29,7 @@ public class StringCalculator {
         }
 
         return sum;
+
     }
 
     private boolean hasCustomDelimiter(String input) {
@@ -35,7 +37,7 @@ public class StringCalculator {
     }
 
     private String extractDelimiters(String input) {
-        int delimiterEndIndex = input.indexOf("\n");
+       int delimiterEndIndex = input.indexOf("\n");
         String delimiterSpec = input.substring(2, delimiterEndIndex);
         List<String> delimiters = new ArrayList<>();
 

@@ -13,10 +13,10 @@ public class StringCalculatorTest {
         calculator = new StringCalculator();
     }
 
-    @Test
-    public void empty(){
-        // Test with the most basic case to confirm the program runs correctly.
-    }
+//    @Test
+//    public void empty(){
+//        // Test with the most basic case to confirm the program runs correctly.
+//    }
 
     @Test
     void shouldReturnZeroForEmptyString() {
@@ -78,8 +78,6 @@ public class StringCalculatorTest {
     void shouldThrowExceptionOnEmptyToken() {
         assertThrows(IllegalArgumentException.class, () -> calculator.add("2,,6"));
     }
-
-
 
 
 }
