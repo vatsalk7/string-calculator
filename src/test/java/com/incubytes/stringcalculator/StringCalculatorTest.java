@@ -64,4 +64,9 @@ public class StringCalculatorTest {
         assertEquals(8, calculator.add("2,1001,6")); // 1001 should be ignored
     }
 
+    @Test
+    void shouldSupportMultiCharDelimiter() {
+        assertEquals(15, calculator.add("//[***]\n5***5***5"));
+    }
+
 }
