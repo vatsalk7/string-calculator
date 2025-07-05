@@ -33,4 +33,11 @@ public class StringCalculatorTest {
         StringCalculator calculator = new StringCalculator();
         assertEquals(6, calculator.add("1,5"));
     }
+
+    @Test
+    void shouldReturnSumOfMultipleNumbers() {
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(10, calculator.add("1,2,3,4"));
+    }
+
 }
